@@ -7,11 +7,15 @@ import spaceshipRoutes from './routes/spaceshipRoutes';
 import connectDB from './database';
 import authRoutes from './routes/authRoutes';
 import protectedRoutes from './routes/protectedRoutes';
+import setupSwagger from './swaggerConfig';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 connectDB();
+
+// Configurar Swagger
+setupSwagger(app);
 
 // Middleware
 app.use(bodyParser.json());
