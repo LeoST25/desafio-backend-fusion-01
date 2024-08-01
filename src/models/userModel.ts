@@ -4,12 +4,14 @@ import bcrypt from 'bcrypt';
 interface IUser extends Document {
   email: string;
   password: string;
+  affiliation: string;
   comparePassword: (password: string) => Promise<boolean>;
 }
 
 const UserSchema: Schema = new Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  affiliation: { type: String, required: true},
 });
 
 UserSchema.pre<IUser>('save', async function(next) {

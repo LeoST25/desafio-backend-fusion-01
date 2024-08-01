@@ -7,7 +7,13 @@ const router = express.Router();
 // Rota protegida
 router.get('/protected', authenticateToken, (req: AuthenticatedRequest, res) => {
   if (req.user) {
-    res.json({ message: 'This is a protected route', user: req.user });
+    res.json({ 
+      message: 'This is a protected route', 
+      user: {
+        email: req.user.email,
+        affiliation: req.user.affiliation,
+      },
+    });
   } else {
     res.status(403).json({ message: 'User not authenticated' });
   }

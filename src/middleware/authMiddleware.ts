@@ -9,6 +9,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret_key';
 interface TokenPayload {
   id: string;
   email: string;
+  affiliation: string;
 }
 
 // Extensão da interface Request para incluir a propriedade user
