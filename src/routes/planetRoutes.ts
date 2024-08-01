@@ -9,10 +9,10 @@ import {
 
 const router = Router();
 
-router.get('/planet', getAllPlanetsController);
-router.post('/planet', createPlanetController);
-router.get('/planet:id', getPlanetByIdController);
-router.put('/planet:id', updatePlanetController);
-router.delete('/planet:id', deletePlanetController);
+router.get('/', getAllPlanetsController);
+router.post('/', createPlanetController);
+router.get('/:id', getPlanetByIdController);
+router.put('/:id', updatePlanetController);
+router.delete('/:id', deletePlanetController);
 
 export default router;
