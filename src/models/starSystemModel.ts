@@ -1,0 +1,36 @@
+export interface StarSystem {
+    id: string;
+    nome: string;
+    descricao: string;
+    planetas: string[]; // IDs dos planetas
+  }
+  
+  let starSystems: StarSystem[] = [];
+  
+  // Função para obter todos os sistemas estelares
+  export const getAllStarSystems = (): StarSystem[] => starSystems;
+  
+  // Função para obter um sistema estelar pelo ID
+  export const getStarSystemById = (id: string): StarSystem | undefined => starSystems.find(s => s.id === id);
+  
+  // Função para criar um novo sistema estelar
+  export const createStarSystem = (starSystem: StarSystem): StarSystem => {
+    starSystems.push(starSystem);
+    return starSystem;
+  };
+  
+  // Função para atualizar um sistema estelar existente
+  export const updateStarSystem = (id: string, updatedData: Partial<StarSystem>): StarSystem | null => {
+    const starSystem = starSystems.find(s => s.id === id);
+    if (starSystem) {
+      Object.assign(starSystem, updatedData);
+      return starSystem;
+    }
+    return null;
+  };
+  
+  // Função para excluir um sistema estelar
+  export const deleteStarSystem = (id: string): void => {
+    starSystems = starSystems.filter(s => s.id !== id);
+  };
+  
