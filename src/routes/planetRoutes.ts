@@ -9,7 +9,6 @@ import {
 import { authenticateToken } from '../middleware/authMiddleware';
 
 const router = Router();
-
 /**
  * @swagger
  * tags:
@@ -45,8 +44,190 @@ const router = Router();
  *     responses:
  *       201:
  *         description: Planet created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                   example: "60d5f4f7e8e3e8b0b8e8e3e4"
+ *                 nome:
+ *                   type: string
+ *                   example: Tatooine
+ *                 clima:
+ *                   type: string
+ *                   example: Arid
+ *                 terreno:
+ *                   type: string
+ *                   example: Desert
+ *                 populacao:
+ *                   type: integer
+ *                   example: 200000
  *       400:
  *         description: Invalid input
+ *       500:
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/planets:
+ *   get:
+ *     summary: Get all planets
+ *     tags: [Planets]
+ *     responses:
+ *       200:
+ *         description: List of planets
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                     example: "60d5f4f7e8e3e8b0b8e8e3e4"
+ *                   nome:
+ *                     type: string
+ *                     example: Tatooine
+ *                   clima:
+ *                     type: string
+ *                     example: Arid
+ *                   terreno:
+ *                     type: string
+ *                     example: Desert
+ *                   populacao:
+ *                     type: integer
+ *                     example: 200000
+ *       500:
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/planets/{id}:
+ *   get:
+ *     summary: Get a planet by ID
+ *     tags: [Planets]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *           example: "60d5f4f7e8e3e8b0b8e8e3e4"
+ *     responses:
+ *       200:
+ *         description: Planet details
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                   example: "60d5f4f7e8e3e8b0b8e8e3e4"
+ *                 nome:
+ *                   type: string
+ *                   example: Tatooine
+ *                 clima:
+ *                   type: string
+ *                   example: Arid
+ *                 terreno:
+ *                   type: string
+ *                   example: Desert
+ *                 populacao:
+ *                   type: integer
+ *                   example: 200000
+ *       404:
+ *         description: Planet not found
+ *       500:
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/planets/{id}:
+ *   put:
+ *     summary: Update a planet by ID
+ *     tags: [Planets]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *           example: "60d5f4f7e8e3e8b0b8e8e3e4"
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               nome:
+ *                 type: string
+ *                 example: Tatooine
+ *               clima:
+ *                 type: string
+ *                 example: Arid
+ *               terreno:
+ *                 type: string
+ *                 example: Desert
+ *               populacao:
+ *                 type: integer
+ *                 example: 200000
+ *     responses:
+ *       200:
+ *         description: Planet updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                   example: "60d5f4f7e8e3e8b0b8e8e3e4"
+ *                 nome:
+ *                   type: string
+ *                   example: Tatooine
+ *                 clima:
+ *                   type: string
+ *                   example: Arid
+ *                 terreno:
+ *                   type: string
+ *                   example: Desert
+ *                 populacao:
+ *                   type: integer
+ *                   example: 200000
+ *       400:
+ *         description: Invalid input
+ *       404:
+ *         description: Planet not found
+ *       500:
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/planets/{id}:
+ *   delete:
+ *     summary: Delete a planet by ID
+ *     tags: [Planets]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *           example: "60d5f4f7e8e3e8b0b8e8e3e4"
+ *     responses:
+ *       204:
+ *         description: Planet deleted successfully
+ *       404:
+ *         description: Planet not found
  *       500:
  *         description: Internal server error
  */
