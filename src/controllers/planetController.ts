@@ -2,15 +2,19 @@ import { Request, Response } from 'express';
 import { getAllPlanets, getPlanetById, createPlanet, updatePlanet, deletePlanet } from '../models/planetModel';
 
 export const getAllPlanetsController = (req: Request, res: Response): void => {
-  res.json(getAllPlanets());
+  const planets = getAllPlanets();
+  res.json(planets);
 };
 
 export const createPlanetController = (req: Request, res: Response): void => {
   const newPlanet = req.body;
-  const createdPlanet = createPlanet(newPlanet);
-  res.status(201).json(createdPlanet);
+  if (!newPlanet.id || !newPlanet.nome || !newPlanet.clima || !newPlanet.terreno || !newPlanet.populacao) {
+  res.status(400).json({ message: 'All fields are required'});
+  return;
+}
+const createdPlanet = createPlanet(newPlanet);
+res.status(201).json(createdPlanet);
 };
-
 export const getPlanetByIdController = (req: Request, res: Response): void => {
   const { id } = req.params;
   const planet = getPlanetById(id);

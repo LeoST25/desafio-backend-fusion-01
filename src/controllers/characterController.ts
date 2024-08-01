@@ -16,8 +16,12 @@ export const getAllCharactersController = (req: Request, res: Response): void =>
 // Função para criar um novo personagem
 export const createCharacterController = (req: Request, res: Response): void => {
   const newCharacter = req.body;
-  const createdCharacter = createCharacter(newCharacter);
-  res.status(201).json(createdCharacter);
+  if (!newCharacter.nome || !newCharacter.raça || !newCharacter.afiliação || !newCharacter.planetaNatal) {
+  res.status(400).json({ message: 'All fields are required'});
+  return;
+}
+const createdCharacter = createCharacter(newCharacter);
+res.status(201).json(createdCharacter);
 };
 
 // Função para obter um personagem por ID

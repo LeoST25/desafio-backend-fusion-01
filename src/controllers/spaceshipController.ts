@@ -16,6 +16,10 @@ export const getAllSpaceshipsController = (req: Request, res: Response): void =>
 // Função para criar uma nova nave espacial
 export const createSpaceshipController = (req: Request, res: Response): void => {
   const newSpaceship = req.body;
+  if (!newSpaceship.id || !newSpaceship.nome || !newSpaceship.modelo || !newSpaceship.fabricante || newSpaceship.capacidadePassageiros === undefined) {
+    res.status(400).json({ message: 'All fields are required' });
+    return;
+  }
   const createdSpaceship = createSpaceship(newSpaceship);
   res.status(201).json(createdSpaceship);
 };

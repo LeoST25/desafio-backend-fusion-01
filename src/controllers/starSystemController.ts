@@ -16,6 +16,10 @@ export const getAllStarSystemsController = (req: Request, res: Response): void =
 // Função para criar um novo sistema estelar
 export const createStarSystemController = (req: Request, res: Response): void => {
   const newStarSystem = req.body;
+  if (!newStarSystem.id || !newStarSystem.nome || !newStarSystem.descricao || !Array.isArray(newStarSystem.planetas)) {
+    res.status(400).json({ message: 'All fields are required and planetas must be an array' });
+    return;
+  }
   const createdStarSystem = createStarSystem(newStarSystem);
   res.status(201).json(createdStarSystem);
 };
