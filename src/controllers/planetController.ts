@@ -1,43 +1,74 @@
 import { Request, Response } from 'express';
-import { getAllPlanets, getPlanetById, createPlanet, updatePlanet, deletePlanet } from '../models/planetModel';
+import { Planet } from '../models/planetModel'; // Importa 'Planet' como uma exportação nomeada
 
-export const getAllPlanetsController = (req: Request, res: Response): void => {
-  const planets = getAllPlanets();
-  res.json(planets);
-};
-
-export const createPlanetController = (req: Request, res: Response): void => {
-  const newPlanet = req.body;
-  if (!newPlanet.id || !newPlanet.nome || !newPlanet.clima || !newPlanet.terreno || !newPlanet.populacao) {
-  res.status(400).json({ message: 'All fields are required'});
-  return;
-}
-const createdPlanet = createPlanet(newPlanet);
-res.status(201).json(createdPlanet);
-};
-export const getPlanetByIdController = (req: Request, res: Response): void => {
-  const { id } = req.params;
-  const planet = getPlanetById(id);
-  if (planet) {
-    res.json(planet);
-  } else {
-    res.status(404).json({ message: 'Planet not found' });
+// Função para obter todos os planetas
+export const getAllPlanetsController = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const planets = await Planet.find();
+    res.json(planets);
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to fetch planets', error: err instanceof Error ? err.message : 'Unknown error' });
   }
 };
 
-export const updatePlanetController = (req: Request, res: Response): void => {
+// Função para criar um novo planeta
+export const createPlanetController = async (req: Request, res: Response): Promise<void> => {
+  const { nome, clima, terreno, população } = req.body;
+  if (!nome || !clima || !terreno || !população) {
+    res.status(400).json({ message: 'All fields are required' });
+    return;
+  }
+
+  try {
+    const newPlanet = new Planet({ nome, clima, terreno, população });
+    const createdPlanet = await newPlanet.save();
+    res.status(201).json(createdPlanet);
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to create planet', error: err instanceof Error ? err.message : 'Unknown error' });
+  }
+};
+
+// Função para obter um planeta por ID
+export const getPlanetByIdController = async (req: Request, res: Response): Promise<void> => {
+  const { id } = req.params;
+
+  try {
+    const planet = await Planet.findById(id);
+    if (planet) {
+      res.json(planet);
+    } else {
+      res.status(404).json({ message: 'Planet not found' });
+    }
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to fetch planet', error: err instanceof Error ? err.message : 'Unknown error' });
+  }
+};
+
+// Função para atualizar um planeta existente
+export const updatePlanetController = async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
   const updatedData = req.body;
-  const updatedPlanet = updatePlanet(id, updatedData);
-  if (updatedPlanet) {
-    res.json(updatedPlanet);
-  } else {
-    res.status(404).json({ message: 'Planet not found' });
+
+  try {
+    const updatedPlanet = await Planet.findByIdAndUpdate(id, updatedData, { new: true });
+    if (updatedPlanet) {
+      res.json(updatedPlanet);
+    } else {
+      res.status(404).json({ message: 'Planet not found' });
+    }
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to update planet', error: err instanceof Error ? err.message : 'Unknown error' });
   }
 };
 
-export const deletePlanetController = (req: Request, res: Response): void => {
+// Função para excluir um planeta
+export const deletePlanetController = async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
-  deletePlanet(id);
-  res.status(204).end();
+
+  try {
+    await Planet.findByIdAndDelete(id);
+    res.status(204).end();
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to delete planet', error: err instanceof Error ? err.message : 'Unknown error' });
+  }
 };

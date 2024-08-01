@@ -1,4 +1,5 @@
 import express from 'express';
+import bodyParser from 'body-parser';
 import planetRoutes from './routes/planetRoutes';
 import starSystemRoutes from './routes/starSystemRoutes';
 import characterRoutes from './routes/characterRoutes';
@@ -11,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 connectDB();
 
 // Middleware
-app.use(express.json());
+app.use(bodyParser.json());
 
 // Routes
 app.use('/api/planets', planetRoutes);
