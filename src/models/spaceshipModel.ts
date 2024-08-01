@@ -1,27 +1,38 @@
-export interface Spaceship {
+import mongoose, { Schema, Document } from 'mongoose';
+
+export interface ISpaceship extends Document {
     id: string;
     nome: string;
     modelo: string;
     fabricante: string;
     capacidadePassageiros: number;
   }
+
+  const SpaceshipSchema: Schema = new Schema({
+    nome: { type: String, required: true },
+    modelo: { type: String, required: true },
+    fabricante: { type: String, required: true },
+    capacidadePassageiros: { type: Number, required: true },
+  });
   
-  let spaceships: Spaceship[] = [];
+  export const Spaceship = mongoose.model<ISpaceship>('Spaceship', SpaceshipSchema);
+  
+  let spaceships: ISpaceship[] = [];
   
   // Função para obter todas as naves espaciais
-  export const getAllSpaceships = (): Spaceship[] => spaceships;
+  export const getAllSpaceships = (): ISpaceship[] => spaceships;
   
   // Função para obter uma nave espacial pelo ID
-  export const getSpaceshipById = (id: string): Spaceship | undefined => spaceships.find(s => s.id === id);
+  export const getSpaceshipById = (id: string): ISpaceship | undefined => spaceships.find(s => s.id === id);
   
   // Função para criar uma nova nave espacial
-  export const createSpaceship = (spaceship: Spaceship): Spaceship => {
+  export const createSpaceship = (spaceship: ISpaceship): ISpaceship => {
     spaceships.push(spaceship);
     return spaceship;
   };
   
   // Função para atualizar uma nave espacial existente
-  export const updateSpaceship = (id: string, updatedData: Partial<Spaceship>): Spaceship | null => {
+  export const updateSpaceship = (id: string, updatedData: Partial<ISpaceship>): ISpaceship | null => {
     const spaceship = spaceships.find(s => s.id === id);
     if (spaceship) {
       Object.assign(spaceship, updatedData);
