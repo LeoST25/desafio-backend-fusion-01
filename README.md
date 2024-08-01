@@ -1,83 +1,291 @@
-# Desafio BackEnd Fusion: **Criar** e **Gerenciar** a Galáxia Inspirada em Star Wars
+# Star Wars API
 
-## Objetivo
-Desenvolver uma API backend que permita a criação, gerenciamento e visualização de uma galáxia inspirada em Star Wars, incluindo planetas, sistemas estelares, personagens e naves espaciais.
+Esta API é um serviço RESTful desenvolvido em Node.js com Express e TypeScript para gerenciar dados relacionados a planetas, sistemas estelares, personagens e naves espaciais no universo Star Wars.
 
-A API deve ser robusta, segura e eficiente, demonstrando habilidades em desenvolvimento backend.
+## Sumário
 
-## Requisitos do Projeto
+- [Instalação](#instalação)
+- [Uso](#uso)
+- [Endpoints](#endpoints)
+- [Autenticação](#autenticação)
+- [Exemplos de Requisições e Respostas](#exemplos-de-requisições-e-respostas)
+- [Documentação da API](#documentação-da-api)
+- [Contribuição](#contribuição)
+- [Licença](#licença)
 
-### Estrutura da API
-- A API deve ser desenvolvida usando Node.js com NestJS ou Express.
+## Instalação
 
-- Utilizar TypeScript para tipagem estática. A API deve seguir os princípios RESTful.
+### Pré-requisitos
 
-### Entidades:
-- Planetas: Nome, clima, terreno, população.
-- Sistemas Estelares: Nome, descrição, lista de planetas.
-- Personagens: Nome, raça, afiliação (Jedi, Sith, Rebelde, etc.), planeta natal.
-- Naves Espaciais: Nome, modelo, fabricante, capacidade de passageiros.
+- Node.js (versão 16.x ou superior)
+- npm (versão 7.x ou superior)
+- MongoDB Atlas ou outro serviço MongoDB
 
-## EndPoints:
+### Passos para instalação
 
-- **Planets**
-  - **POST 📤 /planets:** Criar um novo planeta.
-  - **GET 📥 /planets:** Listar todos os planetas.
-  - **GET 📥 /planets/:id:** Obter detalhes de um planeta específico.
-  - **PUT 🔄 /planets/:id:** Atualizar informações de um planeta.
-  - **DELETE 🗑 /planets/:id:** Deletar um planeta.
+1. **Clone o repositório:**
 
-- **Start Systems**
-  - **POST 📤 /star-systems:** Criar um novo sistema estelar.
-  - **GET 📥 /star-systems:** Listar todos os sistemas estelares.
-  - **GET 📥 /star-systems/:id:** Obter detalhes de um sistema estelar específico.
-  - **PUT 🔄 /star-systems/:id:** Atualizar informações de um sistema estelar
-  - **DELETE 🗑 /star-systems/:id**: Deletar um sistema estelar.
+   ```bash
+   git clone https://github.com/LeoST98/desafio-backend-fusion-01.git
+   cd desafio-backend-fusion-01
 
-- **Characters**
-  - **POST 📤 /characters:** Criar um novo personagem.
-  - **GET 📥 /characters:** Listar todos os personagens.
-  - **GET 📥 /characters/:id:** Obter detalhes de um personagem específico.
-  - **PUT 🔄 /characters/:id:** Atualizar informações de um personagem.
-  - **DELETE 🗑 /characters/:id:** Deletar um personagem.
+## Instale as dependências:
+``` npm install ```
 
-- **SpaceShips**
-  - **POST 📤 /spaceships:** Criar uma nova nave espacial.
-  - **GET 📥 /spaceships:** Listar todas as naves espaciais.
-  - **GET 📥 /spaceships/:id:** Obter detalhes de uma nave espacial específica.
-  - **PUT 🔄 /spaceships/:id:** Atualizar informações de uma nave espacial.
-  - **DELETE 🗑 /spaceships/:id:** Deletar uma nave espacial.
+## Configure as variáveis de ambiente:
+Crie um arquivo .env na raiz do projeto e adicione a URL de conexão do MongoDB:
+``` 
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/<dbname>?retryWrites=true&w=majority
+JWT_SECRET=your_jwt_secret_key
+```
 
-### Autenticação e Autorização
-- Implementar autenticação de usuários usando JWT.
-- Os usuários devem ser categorizados com base em afiliações como Jedi, Sith, Rebeldes, etc.
-- Proteger os endpoints para que apenas usuários autenticados possam criar, atualizar e deletar dados.
+## Inicie a API:
+```
+npm start
+```
+A API estará disponível em http://localhost:3000/api-docs
 
-### Banco de Dados
-- Usar qualquer banco de dados, relacional ou não-relacional.
-- Utilizar qualquer ORM de sua escolha.
+# Uso
+- Para iniciar a API:
+  Execute npm start para rodar o servidor localmente.
+- Para testar a API:
+  Utilize ferramentas como Postman ou cURL para enviar requisições HTTP para os endpoints descritos abaixo.
 
-### Validação e Tratamento de Erros
-- Implementar validação de dados de entrada.Gerenciar e retornar mensagens de erro apropriadas.
+# Endpoints
+  ## Planetas
 
-### Documentação da API (Opcional):
-- Documentar a API usando Swagger ou Postman (não obrigatória).
-- Incluir exemplos de requisições e respostas (schemas).
+### Listar Todos os Planetas
 
-### Testes (Opcional):
-- Escrever testes unitários e de integração para a API usando Jest (não obrigatória).
+**GET** `/api/planets`
 
-### Tecnologias e Ferramentas
-- Linguagens: TypeScriptFrameworks: NestJS ou Express
+Retorna uma lista de todos os planetas.
 
-### Extras:
-- Deploy: Hospedar a API em um serviço como Heroku, AWS, ou DigitalOcean.
-- Logs e Monitoramento: Implementar logs e monitoramento para a API usando ferramentas como Winston ou Morgan.
+---
 
-### Submissão
-- Repositório GitHub: Submeter o código em um repositório público no GitHub.
+### Criar um Novo Planeta
 
-### Documentação:
-- Incluir um README.md detalhado com instruções de instalação, uso e qualquer informação relevante.
-- Demo: Fornecer um link para a API hospedada e a documentação.
-- Prazo prazo para submissão é de 15 dias  partir da data de início.
+**POST** `/api/planets`
+
+Cria um novo planeta.
+
+---
+
+### Atualizar um Planeta Existente
+
+**PUT** `/api/planets/{id}`
+
+Atualiza um planeta existente com o ID especificado.
+
+---
+
+### Deletar um Planeta Existente
+
+**DELETE** `/api/planets/{id}`
+
+Deleta um planeta existente com o ID especificado.
+
+## Sistemas Solares
+**GET** `/api/star-systems`
+
+Retorna uma lista de todos os sistemas estelares.
+
+---
+**POST** `/api/star-systems`
+
+Cria um novo sistema estelar.
+
+---
+**PUT** `/api/star-systems/{id}`
+
+Atualiza um sistema estelar existente com o ID especificado.
+
+## Deletar um Sistema Estelar Existente
+**DELETE** `/api/star-systems/{id}`
+
+Deleta um sistema estelar existente com o ID especificado.
+
+## Personagens
+
+### Listar Todos os Personagens
+
+**GET** `/api/characters`
+
+Retorna uma lista de todos os personagens.
+
+---
+
+### Criar um Novo Personagem
+
+**POST** `/api/characters`
+
+Cria um novo personagem.
+
+---
+
+### Atualizar um Personagem Existente
+
+**PUT** `/api/characters/{id}`
+
+Atualiza um personagem existente com o ID especificado.
+
+---
+
+### Deletar um Personagem Existente
+
+**DELETE** `/api/characters/{id}`
+
+Deleta um personagem existente com o ID especificado.
+
+## Naves Espaciais
+
+### Listar Todas as Naves Espaciais
+
+**GET** `/api/spaceships`
+
+Retorna uma lista de todas as naves espaciais.
+
+---
+
+### Criar uma Nova Nave Espacial
+
+**POST** `/api/spaceships`
+
+Cria uma nova nave espacial.
+
+---
+
+### Atualizar uma Nave Espacial Existente
+
+**PUT** `/api/spaceships/{id}`
+
+Atualiza uma nave espacial existente com o ID especificado.
+
+---
+
+### Deletar uma Nave Espacial Existente
+
+**DELETE** `/api/spaceships/{id}`
+
+Deleta uma nave espacial existente com o ID especificado.
+
+## Autenticação
+
+A API usa JSON Web Tokens (JWT) para autenticação.
+
+### Autenticar um Usuário
+
+**POST** `/api/login`
+
+Autentica um usuário e retorna um token JWT. Envie o e-mail e a senha no corpo da requisição.
+
+**Corpo da Requisição:**
+
+```json
+{
+  "email": "user@example.com",
+  "password": "yourpassword"
+}
+```
+### Resposta:
+```json
+{
+  "token": "your_jwt_token"
+}
+```
+## Exemplos de Requisições e Respostas
+
+### Exemplo de Requisição POST para Criar um Planeta
+
+**Requisição:**
+
+```http
+POST /api/planets
+Content-Type: application/json
+Authorization: Bearer <your_jwt_token>
+
+{
+  "nome": "Tatooine",
+  "clima": "árido",
+  "terreno": "deserto",
+  "populacao": 200000
+}
+```
+### Resposta:
+```json
+{
+  "id": "63c8d1f5e4b0d9c49b13f12a",
+  "nome": "Tatooine",
+  "clima": "árido",
+  "terreno": "deserto",
+  "populacao": 200000
+}
+```
+## Exemplo de Requisição GET para Listar Planetas
+### Requisição:
+```http
+GET /api/planets
+Authorization: Bearer <your_jwt_token>
+```
+### Resposta:
+```json
+[
+  {
+    "id": "63c8d1f5e4b0d9c49b13f12a",
+    "nome": "Tatooine",
+    "clima": "árido",
+    "terreno": "deserto",
+    "populacao": 200000
+  },
+  ...
+]
+```
+## Exemplo de Requisição PUT para Atualizar um Planeta
+### Requisição:
+```http
+PUT /api/planets/63c8d1f5e4b0d9c49b13f12a
+Content-Type: application/json
+Authorization: Bearer <your_jwt_token>
+
+{
+  "nome": "Tatooine",
+  "clima": "árido",
+  "terreno": "deserto",
+  "populacao": 250000
+}
+```
+### Resposta:
+```json
+{
+  "id": "63c8d1f5e4b0d9c49b13f12a",
+  "nome": "Tatooine",
+  "clima": "árido",
+  "terreno": "deserto",
+  "populacao": 250000
+}
+```
+## Exemplo de Requisição DELETE para Deletar um Planeta
+### Requisição:
+```http
+DELETE /api/planets/63c8d1f5e4b0d9c49b13f12a
+Authorization: Bearer <your_jwt_token>
+```
+### Resposta:
+```json
+{
+  "message": "Planeta deletado com sucesso"
+}
+```
+# Documentação da API
+A documentação completa da API pode ser acessada usando Swagger, disponível em http://localhost:3000/api-docs após iniciar o servidor.
+
+# Contribuição
+Contribuições são bem-vindas! Se você deseja contribuir para o projeto, siga estes passos:
+
+-  Fork o repositório.
+-  Crie uma branch para sua feature (git checkout -b feature/MinhaFeature).
+-  Faça as alterações e commit (git commit -am 'Adiciona nova feature').
+-  Push para a branch (git push origin feature/MinhaFeature).
+-  Crie um Pull Request.
+
+# Licença
+  Este projeto é licenciado sob a `MIT License`.
