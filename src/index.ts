@@ -3,9 +3,12 @@ import planetRoutes from './routes/planetRoutes';
 import starSystemRoutes from './routes/starSystemRoutes';
 import characterRoutes from './routes/characterRoutes';
 import spaceshipRoutes from './routes/spaceshipRoutes';
+import connectDB from './database';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+connectDB();
 
 // Middleware
 app.use(express.json());
