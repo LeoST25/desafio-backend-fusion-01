@@ -6,22 +6,19 @@ import {
   updateCharacterController,
   deleteCharacterController 
 } from '../controllers/characterController';
+import { authenticateToken } from '../middleware/authMiddleware';
 
 const router = Router();
 
 // Rota para obter todos os personagens
-router.get('/', getAllCharactersController);
-
+router.get('/', authenticateToken, getAllCharactersController);
 // Rota para criar um novo personagem
-router.post('/', createCharacterController);
-
+router.post('/', authenticateToken, createCharacterController);
 // Rota para obter um personagem por ID
-router.get('/:id', getCharacterByIdController);
-
+router.get('/:id', authenticateToken, getCharacterByIdController);
 // Rota para atualizar um personagem existente
-router.put('/:id', updateCharacterController);
-
+router.put('/:id', authenticateToken, updateCharacterController);
 // Rota para excluir um personagem
-router.delete('/:id', deleteCharacterController);
+router.delete('/:id', authenticateToken, deleteCharacterController);
 
 export default router;

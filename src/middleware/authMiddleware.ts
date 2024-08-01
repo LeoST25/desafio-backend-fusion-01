@@ -12,7 +12,6 @@ interface TokenPayload {
   affiliation: string;
 }
 
-// Extensão da interface Request para incluir a propriedade user
 export interface AuthenticatedRequest extends Request {
   user?: TokenPayload;
 }
@@ -29,7 +28,6 @@ export const authenticateToken = (req: AuthenticatedRequest, res: Response, next
     if (err) {
       return res.status(403).json({ message: 'Invalid token' });
     }
-    // Type assertion: cast `decoded` to `TokenPayload` if it's not undefined
     req.user = decoded as TokenPayload;
     next();
   });

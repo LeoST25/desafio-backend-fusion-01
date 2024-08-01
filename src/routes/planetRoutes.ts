@@ -6,13 +6,19 @@ import {
   updatePlanetController,
   deletePlanetController
 } from '../controllers/planetController';
+import { authenticateToken } from '../middleware/authMiddleware';
 
 const router = Router();
 
-router.get('/', getAllPlanetsController);
-router.post('/', createPlanetController);
-router.get('/:id', getPlanetByIdController);
-router.put('/:id', updatePlanetController);
-router.delete('/:id', deletePlanetController);
+// Rota para obter todos os planetas
+router.get('/', authenticateToken, getAllPlanetsController);
+// Rota para criar um novo planeta
+router.post('/', authenticateToken, createPlanetController);
+// Rota para obter um planeta por ID
+router.get('/:id', authenticateToken, getPlanetByIdController);
+// Rota para atualizar um planeta
+router.put('/:id', authenticateToken, updatePlanetController);
+// Rota para excluir um planeta
+router.delete('/:id', authenticateToken, deletePlanetController);
 
 export default router;
