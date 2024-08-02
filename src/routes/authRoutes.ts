@@ -1,5 +1,6 @@
 import express from 'express';
-import bcrypt from 'bcrypt';
+// import bcrypt from 'bcrypt';
+import argon2, { hash, verify } from 'argon2';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { User } from '../models/userModel';
@@ -56,7 +57,7 @@ router.post('/register', async (req, res) => {
   }
 
   try {
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await hash(password);
     const newUser = new User({ email, password: hashedPassword, affiliation });
     await newUser.save();
 
@@ -106,7 +107,7 @@ router.post('/login', async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) return res.status(401).json({ message: 'User not found' });
 
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await verify(user.password, password);
     if (!isMatch) return res.status(401).json({ message: 'Invalid credentials' });
 
     const token = jwt.sign({ id: user._id, email: user.email, affiliation: user.affiliation }, JWT_SECRET, {
