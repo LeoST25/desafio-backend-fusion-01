@@ -21,6 +21,9 @@ setupSwagger(app);
 app.use(express.json());
 
 // Routes
+app.get("/", (req, res) => {
+  res.send("Hello, Star Wars Galaxy!");
+});
 app.use('/api/planets', planetRoutes);
 app.use('/api/star-systems', starSystemRoutes);
 app.use('/api/characters', characterRoutes);
