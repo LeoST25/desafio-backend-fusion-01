@@ -32,13 +32,13 @@ const router = Router();
  *               nome:
  *                 type: string
  *                 example: Luke Skywalker
- *               raca:
+ *               raça:
  *                 type: string
  *                 example: Human
- *               afiliacao:
+ *               afiliação:
  *                 type: string
  *                 example: Jedi
- *               planeta_natal:
+ *               planetaNatal:
  *                 type: string
  *                 example: Tatooine
  *     responses:
@@ -55,13 +55,13 @@ const router = Router();
  *                 nome:
  *                   type: string
  *                   example: Luke Skywalker
- *                 raca:
+ *                 raça:
  *                   type: string
  *                   example: Human
- *                 afiliacao:
+ *                 afiliação:
  *                   type: string
  *                   example: Jedi
- *                 planeta_natal:
+ *                 planetaNatal:
  *                   type: string
  *                   example: Tatooine
  *       400:
@@ -92,13 +92,13 @@ const router = Router();
  *                   nome:
  *                     type: string
  *                     example: Luke Skywalker
- *                   raca:
+ *                   raça:
  *                     type: string
  *                     example: Human
- *                   afiliacao:
+ *                   afiliação:
  *                     type: string
  *                     example: Jedi
- *                   planeta_natal:
+ *                   planetaNatal:
  *                     type: string
  *                     example: Tatooine
  *       500:
@@ -132,13 +132,13 @@ const router = Router();
  *                 nome:
  *                   type: string
  *                   example: Luke Skywalker
- *                 raca:
+ *                 raça:
  *                   type: string
  *                   example: Human
- *                 afiliacao:
+ *                 afiliação:
  *                   type: string
  *                   example: Jedi
- *                 planeta_natal:
+ *                 planetaNatal:
  *                   type: string
  *                   example: Tatooine
  *       404:
@@ -170,13 +170,13 @@ const router = Router();
  *               nome:
  *                 type: string
  *                 example: Luke Skywalker
- *               raca:
+ *               raça:
  *                 type: string
  *                 example: Human
- *               afiliacao:
+ *               afiliação:
  *                 type: string
  *                 example: Jedi
- *               planeta_natal:
+ *               planetaNatal:
  *                 type: string
  *                 example: Tatooine
  *     responses:
@@ -193,13 +193,13 @@ const router = Router();
  *                 nome:
  *                   type: string
  *                   example: Luke Skywalker
- *                 raca:
+ *                 raça:
  *                   type: string
  *                   example: Human
- *                 afiliacao:
+ *                 afiliação:
  *                   type: string
  *                   example: Jedi
- *                 planeta_natal:
+ *                 planetaNatal:
  *                   type: string
  *                   example: Tatooine
  *       400:
