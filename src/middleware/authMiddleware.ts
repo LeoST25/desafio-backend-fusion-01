@@ -6,19 +6,19 @@ dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret_key';
 
-interface TokenPayload {
+interface UserPayload {
   id: string;
   email: string;
-  affiliation: string;
+  affiliation: string[];
 }
 
 export interface AuthenticatedRequest extends Request {
-  user?: TokenPayload;
+  user?: UserPayload;
 }
 
 export const authenticateToken = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-  const authHeader = req.headers.authorization;
-  const token = authHeader && authHeader.split(' ')[1];
+  const authHeader = req.headers['authorization'];
+  const token = authHeader?.split(' ')[1];
 
   if (!token) {
     return res.status(401).json({ message: 'Access denied' });
@@ -26,9 +26,12 @@ export const authenticateToken = (req: AuthenticatedRequest, res: Response, next
 
   jwt.verify(token, JWT_SECRET, (err, decoded) => {
     if (err) {
-      return res.status(403).json({ message: 'Invalid token' });
+      return res.status(403).json({ message: 'Invalid token: Access denied' });
     }
-    req.user = decoded as TokenPayload;
+
+    const user = decoded as UserPayload;
+
+    req.user = user;
     next();
   });
 };

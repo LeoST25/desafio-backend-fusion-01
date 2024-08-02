@@ -38,7 +38,7 @@ const router = Router();
  *               fabricante:
  *                 type: string
  *                 example: Mon Calamari Shipyards
- *               capacidade_passageiros:
+ *               capacidadePassageiros:
  *                 type: integer
  *                 example: 1200
  *     responses:
@@ -61,7 +61,7 @@ const router = Router();
  *                 fabricante:
  *                   type: string
  *                   example: Mon Calamari Shipyards
- *                 capacidade_passageiros:
+ *                 capacidadePassageiros:
  *                   type: integer
  *                   example: 1200
  *       400:
@@ -98,7 +98,7 @@ const router = Router();
  *                   fabricante:
  *                     type: string
  *                     example: Mon Calamari Shipyards
- *                   capacidade_passageiros:
+ *                   capacidadePassageiros:
  *                     type: integer
  *                     example: 1200
  *       500:
@@ -138,7 +138,7 @@ const router = Router();
  *                 fabricante:
  *                   type: string
  *                   example: Mon Calamari Shipyards
- *                 capacidade_passageiros:
+ *                 capacidadePassageiros:
  *                   type: integer
  *                   example: 1200
  *       404:
@@ -176,7 +176,7 @@ const router = Router();
  *               fabricante:
  *                 type: string
  *                 example: Mon Calamari Shipyards
- *               capacidade_passageiros:
+ *               capacidadePassageiros:
  *                 type: integer
  *                 example: 1200
  *     responses:
@@ -199,7 +199,7 @@ const router = Router();
  *                 fabricante:
  *                   type: string
  *                   example: Mon Calamari Shipyards
- *                 capacidade_passageiros:
+ *                 capacidadePassageiros:
  *                   type: integer
  *                   example: 1200
  *       400:
@@ -233,11 +233,11 @@ const router = Router();
  */
 
 // Rota para obter todas as naves espaciais
-router.get('/', authenticateToken, getAllSpaceshipsController);
+router.get('/',getAllSpaceshipsController);
 // Rota para criar uma nova nave espacial
 router.post('/', authenticateToken, createSpaceshipController);
 // Rota para obter uma nave espacial por ID
-router.get('/:id', authenticateToken, getSpaceshipByIdController);
+router.get('/:id', getSpaceshipByIdController);
 // Rota para atualizar uma nave espacial existente
 router.put('/:id', authenticateToken, updateSpaceshipController);
 // Rota para excluir uma nave espacial

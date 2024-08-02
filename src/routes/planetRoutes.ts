@@ -233,11 +233,11 @@ const router = Router();
  */
 
 // Rota para obter todos os planetas
-router.get('/', authenticateToken, getAllPlanetsController);
+router.get('/', getAllPlanetsController);
 // Rota para criar um novo planeta
 router.post('/', authenticateToken, createPlanetController);
 // Rota para obter um planeta por ID
-router.get('/:id', authenticateToken, getPlanetByIdController);
+router.get('/:id', getPlanetByIdController);
 // Rota para atualizar um planeta
 router.put('/:id', authenticateToken, updatePlanetController);
 // Rota para excluir um planeta

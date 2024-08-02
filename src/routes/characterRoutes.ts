@@ -233,11 +233,11 @@ const router = Router();
  */
 
 // Rota para obter todos os personagens
-router.get('/', authenticateToken, getAllCharactersController);
+router.get('/', getAllCharactersController);
 // Rota para criar um novo personagem
 router.post('/', authenticateToken, createCharacterController);
 // Rota para obter um personagem por ID
-router.get('/:id', authenticateToken, getCharacterByIdController);
+router.get('/:id',  getCharacterByIdController);
 // Rota para atualizar um personagem existente
 router.put('/:id', authenticateToken, updateCharacterController);
 // Rota para excluir um personagem

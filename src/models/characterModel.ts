@@ -2,9 +2,9 @@ import mongoose, { Schema, Document } from 'mongoose';
 export interface ICharacter extends Document {
     id: string;
     nome: string;
-    raça: string;
-    afiliação: string; // Jedi, Sith, Rebelde, etc.
-    planetaNatal: string; // ID do planeta natal
+    raca: string;
+    afiliacao: string; // Jedi, Sith, Rebelde, etc.
+    planeta_natal: string; // ID do planeta natal
   }
 
   const CharacterSchema: Schema = new Schema({
