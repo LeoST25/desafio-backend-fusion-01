@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { User } from '../models/userModel';
 import dotenv from 'dotenv';
+import { verify } from 'argon2';
 
 dotenv.config();
 
@@ -41,7 +42,7 @@ export const loginController = async (req: Request, res: Response): Promise<void
 
   try {
     const user = await User.findOne({ email });
-    if (!user || !(await user.comparePassword(password))) {
+    if (!user || !await verify(user.password, password)) {
       res.status(401).json({ message: 'Invalid email or password' });
       return;
     }
