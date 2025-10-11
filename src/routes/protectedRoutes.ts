@@ -1,6 +1,6 @@
 import express from 'express';
-import { authenticateToken } from '../middleware/authMiddleware';
-import { AuthenticatedRequest } from '../middleware/authMiddleware'; // Importar a interface correta
+import { authenticateToken, requireAffiliation, requireGroup } from '../middleware/cognitoAuthMiddleware';
+import { AuthenticatedRequest } from '../middleware/cognitoAuthMiddleware'; // Importar a interface correta
 
 const router = express.Router();
 
@@ -42,15 +42,35 @@ const router = express.Router();
 router.get('/protected', authenticateToken, (req: AuthenticatedRequest, res) => {
   if (req.user) {
     res.json({ 
-      message: 'This is a protected route', 
+      message: 'This is a protected route powered by AWS Cognito', 
       user: {
+        userId: req.user.sub,
         email: req.user.email,
-        affiliation: req.user.affiliation,
+        username: req.user.username,
+        affiliation: req.user['custom:affiliation'],
+        groups: req.user['cognito:groups'] || [],
+        clientId: req.user.client_id
       },
     });
   } else {
     res.status(403).json({ message: 'User not authenticated' });
   }
+});
+
+// Rota que requer afiliação Jedi
+router.get('/jedi-only', authenticateToken, requireAffiliation('jedi'), (req: AuthenticatedRequest, res) => {
+  res.json({
+    message: 'May the Force be with you, Jedi!',
+    user: req.user?.username || req.user?.email
+  });
+});
+
+// Rota que requer grupo de Administradores
+router.get('/admin-only', authenticateToken, requireGroup('Admins'), (req: AuthenticatedRequest, res) => {
+  res.json({
+    message: 'Welcome to the admin panel',
+    user: req.user?.username || req.user?.email
+  });
 });
 
 export default router;
